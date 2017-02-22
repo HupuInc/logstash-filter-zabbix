@@ -1,0 +1,7 @@
+*.gem
+.rbx
+.bundle
+build
+vendor
+.DS_Store
+Gemfile.lock
