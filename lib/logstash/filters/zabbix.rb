@@ -16,14 +16,16 @@ class LogStash::Filters::Zabbix < LogStash::Filters::Base
 
   public
   def register
-    @items = Cache.fetch(
+    options = {
       url: @url,
       user: @user,
       password: @password,
       group_id: @group_id,
       keys: @keys
-    )
-    @logger.info("Got zabbix items", :size => @items.keys.size)
+    }
+
+    @zabbix_updater = Cache.new(@logger, options)
+    @zabbix_updater.start
   end # def register
 
   public
@@ -32,7 +34,7 @@ class LogStash::Filters::Zabbix < LogStash::Filters::Base
 
     if 'insert' == event.get('type')
       data = event.get("data")
-      item = @items[data["itemid"]]
+      item = @zabbix_updater.items[data["itemid"]]
 
       if item
         metric = {
