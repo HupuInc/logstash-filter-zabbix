@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = 'logstash-filter-zabbix'
-  s.version       = '0.1.1'
+  s.version       = '0.1.2'
   s.licenses      = ['Apache-2.0']
   s.summary       = %q{logstash-filter-zabbix - A filter to retain zabbix metrics you want to}
   s.description   = %q{This plugin will keep the specific items you want from zabbix history data stream}
